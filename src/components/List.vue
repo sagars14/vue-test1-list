@@ -18,7 +18,7 @@
           <td>{{ formattedDate(user.created_at) }}</td>
           <td v-show="showDeleteBtn && mouseOveredUser === i">
             <button type="button" @click="$emit('delete', user.name)">
-              Delete
+              <strong>Delete</strong>
             </button>
           </td>
         </tr>

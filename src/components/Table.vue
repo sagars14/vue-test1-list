@@ -15,14 +15,20 @@
           @delete="deleteUser($event)" />
       </div>
       <div class="right-section">
-        <div>
-          <div class="sort-by">
+        <div style="margin-top: 1em">
+          <div class="sort-by" style="margin-bottom: 2em">
             <input id="name" v-model="picked" type="radio" value="name" />
-            <label for="name">Sort by Value: </label>
+            <label for="name"
+              ><span style="color: #a3a9af">Sort by</span> Value:
+              <span v-if="picked === 'name'" class="sort-by-value"></span>
+            </label>
           </div>
           <div class="sort-by">
             <input id="date" v-model="picked" type="radio" value="date" />
-            <label for="date">Sort by Added Date: </label>
+            <label for="date"
+              ><span style="color: #a3a9af">Sort by</span> Added Date:
+              <span v-if="picked === 'date'" class="sort-by-date"></span
+            ></label>
           </div>
         </div>
       </div>
@@ -30,16 +36,20 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { defineComponent } from 'vue';
 import List from './List.vue';
 import SearchBar from './SearchBar.vue';
 import moment from 'moment';
 
+interface User {
+  name: string;
+  created_at: string | Date | any;
+}
 export default defineComponent({
   name: 'Table',
   components: { List, SearchBar },
-  data() {
+  data(): any {
     return {
       showAddBtn: false,
       showTable: true,
@@ -49,10 +59,10 @@ export default defineComponent({
     };
   },
   watch: {
-    picked(pickedValue) {
+    picked(pickedValue: string): void {
       console.log(pickedValue);
       if (pickedValue === 'name') {
-        this.users.sort((a, b) => {
+        this.users.sort((a: User, b: User): number => {
           var nameA = a.name.toUpperCase(); // ignore upper and lowercase
           var nameB = b.name.toUpperCase(); // ignore upper and lowercase
           if (nameA < nameB) {
@@ -67,7 +77,7 @@ export default defineComponent({
         });
       } else {
         console.log('sort by date');
-        this.users.sort((a, b) => {
+        this.users.sort((a: User, b: User) => {
           return b.created_at - a.created_at;
         });
       }
@@ -118,10 +128,10 @@ export default defineComponent({
     this.picked = 'name';
   },
   methods: {
-    findUser(uname) {
+    findUser(uname: string): void {
       if (this.users.length > 0) {
         const foundedUser = this.users?.find(
-          (user) => user.name.toLowerCase() === uname.toLowerCase()
+          (user: User) => user.name.toLowerCase() === uname.toLowerCase()
         );
         if (foundedUser && foundedUser !== undefined) {
           this.tempUsers = [...this.users];
@@ -142,7 +152,7 @@ export default defineComponent({
         this.showAddBtn = false;
       }
     },
-    addUser(newUser) {
+    addUser(newUser: string): void {
       console.log('new user', newUser);
       if (newUser && newUser !== '') {
         this.users.unshift({
@@ -156,11 +166,9 @@ export default defineComponent({
         window.localStorage.setItem('users', JSON.stringify([...this.users]));
       }
     },
-    deleteUser(name) {
-      console.log('inside delete use--', name);
-      console.log('this.users', this.users);
+    deleteUser(name: string) {
       const newUsers = this.users.filter(
-        (user) => user.name.toLowerCase() !== name.toLowerCase()
+        (user: User) => user.name.toLowerCase() !== name.toLowerCase()
       );
       this.users = [...newUsers];
       this.tempUsers = [...newUsers];

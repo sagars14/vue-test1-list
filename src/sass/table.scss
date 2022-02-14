@@ -1,10 +1,12 @@
+@use 'sass/color.scss';
+
 .main-container {
   max-width: 80%;
   margin: 50px 20px 50px auto;
   .exact-match {
     padding: 10px 10px;
     color: white;
-    background-color: green;
+    background-color: color.$exact-match;
   }
   .user-list {
     display: flex;
@@ -12,6 +14,44 @@
       width: 80%;
     }
     .right-section {
+      width: 20%;
+      .sort-by {
+        position: relative;
+        label {
+          width: 100%;
+          color: color.$label-color;
+          background: color.$button;
+          padding: 10px;
+        }
+        input {
+          position: absolute;
+          opacity: 0;
+          right: 0;
+          &:checked + label {
+            background: color.$input;
+          }
+        }
+        .sort-by-value {
+          display: inline-block;
+          margin-left: 3;
+          margin-bottom: 3px;
+          height: 5px;
+          width: 5px;
+          border-radius: 50%;
+          background-color: color.$dot-color;
+          color: color.$dot-color;
+        }
+        .sort-by-date {
+          display: inline-block;
+          margin-left: 3;
+          margin-bottom: 3px;
+          height: 5px;
+          width: 5px;
+          border-radius: 50%;
+          background-color: color.$dot-color;
+          color: color.$dot-color;
+        }
+      }
     }
   }
 }

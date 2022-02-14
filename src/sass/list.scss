@@ -1,0 +1,11 @@
+.user-table {
+  width: 85%;
+  tr {
+    border-bottom: 1px solid red;
+    td,
+    th {
+      width: 25%;
+      padding: 15px 5px;
+    }
+  }
+}

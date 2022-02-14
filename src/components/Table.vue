@@ -1,9 +1,15 @@
 <template>
   <div class="main-container">
-    <SearchBar :show-add-btn="showAddBtn" @add="addUser($event)" />
+    <SearchBar
+      :show-add-btn="showAddBtn"
+      @add="addUser($event)"
+      @find="findUser($event)" />
+    <p v-show="showMatchFound" style="text-align: center; width: 710px">
+      <span class="exact-match"><strong> Exact Match !</strong></span>
+    </p>
     <div class="user-list">
       <div class="left-section">
-        <List :users-list="users" />
+        <List :users-list="users" :show-table="showTable" />
       </div>
       <div class="right-section"></div>
     </div>
@@ -22,7 +28,9 @@ export default defineComponent({
   data() {
     return {
       showAddBtn: false,
+      showTable: true,
       users: [],
+      tempUsers: [],
     };
   },
   mounted() {
@@ -69,6 +77,29 @@ export default defineComponent({
     this.users = [...users];
   },
   methods: {
+    findUser(uname) {
+      if (this.users.length > 0) {
+        const foundedUser = this.users?.find(
+          (user) => user.name.toLowerCase() === uname.toLowerCase()
+        );
+        if (foundedUser && foundedUser !== undefined) {
+          this.tempUsers = [...this.users];
+          this.users = [foundedUser];
+          this.showTable = true;
+          this.showAddBtn = false;
+          this.showMatchFound = true;
+        } else {
+          this.showMatchFound = false;
+          this.showAddBtn = true;
+          this.showTable = false;
+        }
+      }
+      if (!uname && uname === '') {
+        if (this.tempUsers.length > 0) this.users = [...this.tempUsers];
+        this.showTable = true;
+        this.showAddBtn = false;
+      }
+    },
     addUser(newUser) {
       console.log('new user', newUser);
       if (newUser && newUser !== '') {
@@ -76,6 +107,9 @@ export default defineComponent({
           name: newUser,
           created_at: moment(new Date()),
         });
+        this.showAddBtn = false;
+        this.showTable = true;
+        this.tempUsers = [...this.users];
         window.localStorage.removeItem('users');
         window.localStorage.setItem('users', JSON.stringify([...this.users]));
       }

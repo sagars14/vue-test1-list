@@ -1,10 +1,11 @@
 <template>
   <div>
-    <table class="user-table">
+    <table v-if="showTable" class="user-table">
       <thead>
         <tr>
           <th>Name</th>
           <th>Created Date</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>
@@ -14,6 +15,7 @@
         </tr>
       </tbody>
     </table>
+    <p v-else>No User found with this name, please Add</p>
   </div>
 </template>
 
@@ -24,6 +26,10 @@ export default {
   props: {
     usersList: {
       type: Array,
+      required: true,
+    },
+    showTable: {
+      type: Boolean,
       required: true,
     },
   },

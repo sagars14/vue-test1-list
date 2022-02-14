@@ -19,11 +19,21 @@ import { defineComponent } from '@vue/runtime-core';
 
 export default defineComponent({
   name: 'SearchBar',
+  props: {
+    showAddBtn: {
+      type: Boolean,
+      required: true,
+    },
+  },
   data() {
     return {
-      showAddBtn: true,
       searchValue: '',
     };
+  },
+  watch: {
+    searchValue() {
+      this.$emit('find', this.searchValue);
+    },
   },
 });
 </script>

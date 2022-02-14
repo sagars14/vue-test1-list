@@ -1,0 +1,24 @@
+@use 'sass/color';
+
+.search-bar {
+  display: flex;
+  margin-bottom: 30px;
+  input {
+    border: 0;
+    background-color: color.$input;
+    width: 60%;
+    padding: 15px 10px;
+    margin-right: 20px;
+    &:focus-visible {
+      outline: 0;
+    }
+  }
+  button {
+    border: 0;
+    background: color.$button-bg;
+    color: color.$button;
+    border-radius: 5px;
+    padding: 10px 20px;
+    width: 10%;
+  }
+}

@@ -10,7 +10,7 @@
       <tbody>
         <tr v-for="(user, i) in usersList" :key="i">
           <td>{{ user.name }}</td>
-          <td>{{ user.created_at }}</td>
+          <td>{{ formattedDate(user.created_at) }}</td>
         </tr>
       </tbody>
     </table>
@@ -18,6 +18,7 @@
 </template>
 
 <script>
+import moment from 'moment';
 export default {
   name: 'List',
   props: {
@@ -28,6 +29,11 @@ export default {
   },
   data() {
     return {};
+  },
+  methods: {
+    formattedDate(date) {
+      return moment(date).fromNow();
+    },
   },
 };
 </script>

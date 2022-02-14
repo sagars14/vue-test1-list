@@ -1,6 +1,6 @@
 <template>
   <div class="main-container">
-    <SearchBar />
+    <SearchBar :show-add-btn="showAddBtn" @add="addUser($event)" />
     <div class="user-list">
       <div class="left-section">
         <List :users-list="users" />
@@ -21,6 +21,7 @@ export default defineComponent({
   components: { List, SearchBar },
   data() {
     return {
+      showAddBtn: false,
       users: [],
     };
   },
@@ -28,44 +29,57 @@ export default defineComponent({
     const users = [
       {
         name: 'ashish',
-        created_at: moment(new Date()).fromNow(),
+        created_at: moment(new Date().toString()),
       },
       {
         name: 'rahul',
-        created_at: moment(new Date()).fromNow(),
+        created_at: moment(new Date().toString()),
       },
       {
         name: 'aanand',
-        created_at: moment(new Date()).fromNow(),
+        created_at: moment(new Date().toString()),
       },
       {
         name: 'pushark',
-        created_at: moment(new Date()).fromNow(),
+        created_at: moment(new Date().toString()),
       },
       {
         name: 'ravi',
-        created_at: moment(new Date()).fromNow(),
+        created_at: moment(new Date().toString()),
       },
       {
         name: 'himanshu',
-        created_at: moment(new Date()).fromNow(),
+        created_at: moment(new Date().toString()),
       },
       {
         name: 'deepak',
-        created_at: moment(new Date()).fromNow(),
+        created_at: moment(new Date().toString()),
       },
       {
         name: 'ankit',
-        created_at: moment(new Date()).fromNow(),
+        created_at: moment(new Date().toString()),
       },
       {
         name: 'kuldeep',
-        created_at: moment(new Date()).fromNow(),
+        created_at: moment(new Date().toString()),
       },
     ];
     window.localStorage.setItem('users', JSON.stringify(users));
     window.localStorage.getItem('users');
     this.users = [...users];
+  },
+  methods: {
+    addUser(newUser) {
+      console.log('new user', newUser);
+      if (newUser && newUser !== '') {
+        this.users.unshift({
+          name: newUser,
+          created_at: moment(new Date()),
+        });
+        window.localStorage.removeItem('users');
+        window.localStorage.setItem('users', JSON.stringify([...this.users]));
+      }
+    },
   },
 });
 </script>

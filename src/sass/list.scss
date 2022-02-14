@@ -3,10 +3,10 @@
 .user-table {
   width: 85%;
   tr {
-    border-bottom: 1px solid red;
+    position: relative;
     td,
     th {
-      width: 25%;
+      width: 34%;
       padding: 15px 5px;
       text-align: left;
       button {
@@ -23,6 +23,15 @@
         padding: 0;
         text-align: right;
       }
+    }
+    &::after {
+      position: absolute;
+      content: '';
+      width: 100%;
+      bottom: 0;
+      left: 0;
+      height: 1px;
+      background: color.$border-bottom;
     }
   }
 }

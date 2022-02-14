@@ -16,7 +16,7 @@
       </div>
       <div class="right-section">
         <div style="margin-top: 1em">
-          <div class="sort-by" style="margin-bottom: 2em">
+          <div class="sort-by">
             <input id="name" v-model="picked" type="radio" value="name" />
             <label for="name"
               ><span style="color: #a3a9af">Sort by</span> Value:

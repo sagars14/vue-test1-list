@@ -22,6 +22,7 @@
           color: color.$label-color;
           background: color.$button;
           padding: 10px;
+          display: inline-block;
         }
         input {
           position: absolute;
@@ -33,8 +34,9 @@
         }
         .sort-by-value {
           display: inline-block;
-          margin-left: 3;
-          margin-bottom: 3px;
+          position: absolute;
+          right: 10px;
+          top: 17px;
           height: 5px;
           width: 5px;
           border-radius: 50%;
@@ -43,8 +45,9 @@
         }
         .sort-by-date {
           display: inline-block;
-          margin-left: 3;
-          margin-bottom: 3px;
+          position: absolute;
+          right: 10px;
+          top: 17px;
           height: 5px;
           width: 5px;
           border-radius: 50%;

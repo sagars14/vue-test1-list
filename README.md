@@ -1,7 +1,32 @@
+# Vue Test App
+
+In this project, we have used the following dependencies.
+
+- [x] node v16.13.0
+- [x] core-js
+- [x] date-fns
+- [x] lodash
+- [x] moment
+- [x] vue
+
 # List
 
 Create list application. Design is in **list.xd** file, which can be opened in
 [Adobe XD](https://www.adobe.com/products/xd.html).
+
+## Author
+
+[@sagars14](https://github.com/sagars14)
+
+## Run Locally
+
+Clone the project
+
+git clone https://github.com/sagars14/vue-test1-list
+
+Go to the project directory
+
+cd github-assignment
 
 ## Project setup
 
